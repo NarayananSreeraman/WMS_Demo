@@ -4,20 +4,250 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <title style="color: beige;">Waste Manager</title>
 
-    <title>Home Page</title>
+    <style>
+        /* General styling */
+        * {
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Background styling with gradient circles */
+        body {
+            background-color: #1a1a1a;
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+        .circle1, .circle2 {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(100px);
+        }
+
+        .circle1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 165, 0, 1); /* Light orange */
+            top: 10%;
+            left: 15%;
+        }
+
+        .circle2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(135, 206, 250, 1); /* Light sky blue */
+            bottom: 10%;
+            right: 15%;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .navbar-nav .nav-link {
+            color: #ff9f29; /* Light orange */
+        }
+
+        /* Container and card styling */
+        .container {
+            margin-top: 5%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-weight: 600;
+        }
+
+        .btn-orange {
+            background-color: #ff9f29;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-orange:hover {
+            background-color: #ffa749;
+        }
+
+        .text-center {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* About Waste Disposal & Steps to Segregate sections styling */
+        .info-section {
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .info-section h2 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            text-align: justify;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        /* Image styling */
+        .info-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Footer styling */
+        footer {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 0;
+            margin-top: 50px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        footer a {
+            color: #ff9f29;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
   </head>
+
   <body>
-    <h1>Home Page</h1>
-    <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+
+    <!-- Background circles -->
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="font-family: 'Poppins', sans-serif; padding: 0 30px;">
+      <a class="navbar-brand" href="#" style="color: antiquewhite; padding-left: 20px; padding-right: 20px;">Waste Manager</a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav" style="gap: 20px;"> <!-- Added gap for spacing between links -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'submit_waste_request' %}" style="color: antiquewhite; transition: color 0.3s ease;" onmouseover="this.style.color='#ff9f29'" onmouseout="this.style.color='antiquewhite'">Create Request</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'waste_request_status' %}" style="color: antiquewhite; transition: color 0.3s ease;" onmouseover="this.style.color='#ff9f29'" onmouseout="this.style.color='antiquewhite'">Request Status</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}" style="color: antiquewhite; transition: color 0.3s ease;" onmouseover="this.style.color='red'" onmouseout="this.style.color='antiquewhite'">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>    
+
+    <!-- Main content -->
+    <div class="container text-center">
+      <h1 class="display-4">Welcome to <b>Waste Manager</b></h1>
+      <p class="lead">Manage your waste collection requests efficiently.</p>
+
+      <div class="row justify-content-center mt-5">
+        
+        <!-- Card for Submit Request -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Submit Waste Request</h5>
+              <p class="card-text">Schedule a new waste collection request with ease.</p>
+              <a href="{% url 'submit_waste_request' %}" class="btn btn-orange">Submit Request</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card for View Status -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">View Request Status</h5>
+              <p class="card-text">Check the current status of your submitted requests.</p>
+              <a href="{% url 'waste_request_status' %}" class="btn btn-orange">View Status</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- About Waste Disposal Section -->
+    <div class="container info-section">
+      <h2>About Waste Disposal</h2>
+      <p>Waste disposal is an essential part of maintaining a clean and sustainable environment. Proper waste management ensures that harmful materials do not contaminate our surroundings, water bodies, or air. Effective waste disposal methods reduce pollution, protect public health, and contribute to environmental conservation. Sorting waste into categories such as recyclable, compostable, and non-recyclable helps streamline the disposal process and maximize recycling efforts. Everyone has a role to play in waste disposal, and we encourage responsible waste management practices.</p>
+      <div style="display: flex; justify-content:center; gap: 30px;">
+        <img src="https://dailystar.com.au/wp-content/uploads/2019/12/Solid-Waste-Disposal1-768x435.jpg" alt="Waste Disposal Image" style="width: 500px; height: auto;">
+        <img src="https://png.pngtree.com/png-vector/20221109/ourmid/pngtree-word-cloud---waste-management-waste-disposal-recycling-vector-png-image_23176162.png" alt="Waste Disposal Image" style="width: 500px; height: auto;">
+      </div>       
+    </div>
+
+    <!-- Steps to Segregate and Dispose Waste Section -->
+    <div class="container info-section">
+      <h2>Steps to Segregate and Dispose Waste</h2>
+      <ul style="padding-left: 30px;">
+        <li>  Separate organic waste (such as food scraps) from inorganic waste. </li><br>
+        <li>  Organic waste can be composted to enrich soil and reduce landfill. </li><br>
+        <li>  Sort recyclable materials (plastics, glass, paper) into specific bins to facilitate recycling and reduce pollution.</li><br>
+        <li>  Keep hazardous waste (such as batteries and electronic waste) in separate containers for safe disposal at designated facilities.</li><br>
+        <li>  Encourage community participation in waste segregation to maximize environmental benefits and foster a cleaner habitat.</li><br>
+      </ul>
+      <div style="display: flex; justify-content:center; gap: 30px;">
+        
+        <img src="https://www.tapioplast.com/wp-content/uploads/2021/08/waste-separation.png" alt="Waste Disposal Image" style="width: 800px; height: auto;">
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>&copy; 2024 Waste Manager</p>
+      <a href="{% url 'waste_request_status' %}">Request Status</a> |
+      <a href="{% url 'submit_waste_request' %}">Create Request</a>
+    </footer>
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
+

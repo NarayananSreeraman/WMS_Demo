@@ -74,12 +74,22 @@ WSGI_APPLICATION = 'registration.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME' : 'WMS',  
+        'USER' : 'CR7',          
+        'PASSWORD': '2140',  
+        'HOST': 'localhost',                   # Set to 'localhost' for local MySQL, or IP for remote
+        'PORT': '3306',                        # Default MySQL port is 3306
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
+
 
 
 # Password validation

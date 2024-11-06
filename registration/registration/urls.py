@@ -16,12 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app1 import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.SignupPage,name='signup'),
     path('login/',views.LoginPage,name='login'),
     path('home/',views.HomePage,name='home'),
     path('logout/',views.LogoutPage,name='logout'),
+    path('submit-request/', views.submit_waste_request, name='submit_waste_request'),
+    path('request-status/', views.waste_request_status, name='waste_request_status'),
+    path('cancel-request/<int:request_id>/', views.cancel_request, name='cancel_request'),
 
 
     

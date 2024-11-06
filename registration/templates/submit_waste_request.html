@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Waste Collection Request</title>
+    
+    <!-- Link to Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background styling with gradient circles */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a; /* Near black background */
+            overflow: hidden;
+            position: relative;
+            color: #fff;
+            flex-direction: column;
+        }
+
+        /* Gradient circles for background */
+        .circle1, .circle2 {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(100px);
+        }
+
+        .circle1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 165, 0, 0.2); /* Light orange */
+            top: 10%;
+            left: 15%;
+        }
+
+        .circle2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(135, 206, 250, 0.2); /* Light sky blue */
+            bottom: 10%;
+            right: 15%;
+        }
+
+        /* Glassmorphism effect for form */
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            z-index: 1;
+        }
+
+        /* Input fields styling */
+        label {
+            font-weight: 400;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        input, select {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+
+        /* Submit button styling */
+        button[type="submit"] {
+            background-color: #ff9f29; /* Light orange */
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ffa749;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #ff4c4c;
+            font-size: 0.9em;
+            display: none;
+        }
+
+        /* Back button styling */
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ff9f29;
+            background: transparent;
+            border: 2px solid #ff9f29;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #ff9f29;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background circles -->
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <!-- Glassmorphic form -->
+    <form method="post" action="{% url 'submit_waste_request' %}">
+        {% csrf_token %}
+
+        <label for="waste_type">Waste Type:</label>
+        {{ form.waste_type }}
+        <span class="error-message" id="waste-type-error">Please select a waste type.</span>
+
+        <label for="quantity">Quantity (kg):</label>
+        {{ form.quantity }}
+        <span class="error-message" id="quantity-error">Please enter a quantity greater than 0.</span>
+
+        <label for="scheduled_time">Scheduled Time:</label>
+        {{ form.scheduled_time }}
+        <span class="error-message" id="scheduled-time-error">Please select a valid date and time.</span>
+
+        <label for="location">Location:</label>
+        {{ form.location }}
+        <span class="error-message" id="location-error">Please enter a location.</span>
+
+        <button type="submit">Submit Request</button>
+    </form>
+
+    <!-- Back button -->
+    <a href="{% url 'home' %}" class="back-button">Back</a>
+
+    <!-- JavaScript for validation -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            let valid = true;
+
+            const wasteType = document.querySelector('#id_waste_type');
+            const quantity = document.querySelector('#id_quantity');
+            const scheduledTime = document.querySelector('#id_scheduled_time');
+            const location = document.querySelector('#id_location');
+
+            // Clear all error messages
+            document.querySelectorAll('.error-message').forEach(function(error) {
+                error.style.display = 'none';
+            });
+
+            // Waste Type validation
+            if (!wasteType.value) {
+                document.querySelector('#waste-type-error').style.display = 'block';
+                valid = false;
+            }
+
+            // Quantity validation
+            if (quantity.value <= 0 || isNaN(quantity.value)) {
+                document.querySelector('#quantity-error').style.display = 'block';
+                valid = false;
+            }
+
+            // Scheduled Time validation
+            if (!scheduledTime.value) {
+                document.querySelector('#scheduled-time-error').style.display = 'block';
+                valid = false;
+            }
+
+            // Location validation
+            if (!location.value.trim()) {
+                document.querySelector('#location-error').style.display = 'block';
+                valid = false;
+            }
+
+            if (!valid) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+    </script>
+</body>
+</html>
+

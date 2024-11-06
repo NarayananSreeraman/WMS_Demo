@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Collection Requests</title>
+    
+    <!-- Link to Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background styling with gradient circles */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a; /* Near black background */
+            overflow: hidden;
+            position: relative;
+            color: #fff;
+            flex-direction: column;
+        }
+
+        /* Gradient circles for background */
+        .circle1, .circle2 {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(100px);
+        }
+
+        .circle1 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 165, 0, 0.2); /* Light orange */
+            top: 10%;
+            left: 15%;
+        }
+
+        .circle2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(135, 206, 250, 0.2); /* Light sky blue */
+            bottom: 10%;
+            right: 15%;
+        }
+
+        /* Container for table */
+        .table-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            z-index: 1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        td {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.08); /* Slightly darker for alternate rows */
+        }
+
+        /* Message when no requests are available */
+        .no-requests {
+            text-align: center;
+            padding: 20px;
+            color: #ff9f29; /* Light orange */
+        }
+
+        /* Cancel button styling */
+        .cancel-button {
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #ff9f29;
+            background: transparent;
+            border: 1px solid #ff9f29;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            text-decoration: none;
+        }
+
+        .cancel-button:hover {
+            background-color: #ff9f29;
+            color: #ffffff;
+        }
+
+        /* Back button styling */
+        .back-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ff9f29;
+            background: transparent;
+            border: 2px solid #ff9f29;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #ff9f29;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background circles -->
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <!-- Table Container with Glassmorphism Effect -->
+    <div class="table-container">
+        <h2>Your Waste Collection Requests</h2>
+
+        <table>
+            <tr>
+                <th>Waste Type</th>
+                <th>Quantity (kg)</th>
+                <th>Scheduled Time</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Action</th> <!-- New column for Cancel Button -->
+            </tr>
+            {% for request in requests %}
+            <tr>
+                <td>{{ request.waste_type }}</td>
+                <td>{{ request.quantity }}</td>
+                <td>{{ request.scheduled_time }}</td>
+                <td>{{ request.location }}</td>
+                <td>{{ request.status }}</td>
+                <td>
+                    <a href="{% url 'cancel_request' request.id %}" class="cancel-button">Cancel</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="no-requests">No waste collection requests submitted.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- Back button -->
+    <a href="{% url 'home' %}" class="back-button">Back</a>
+</body>
+</html>
