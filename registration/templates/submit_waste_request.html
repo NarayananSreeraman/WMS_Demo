@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Waste Collection Request</title>
     
+    
     <!-- Link to Poppins font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
@@ -41,7 +42,7 @@
         .circle1 {
             width: 300px;
             height: 300px;
-            background: rgba(255, 165, 0, 0.2); /* Light orange */
+            background: rgba(255, 165, 0, 1); /* Light orange */
             top: 10%;
             left: 15%;
         }
@@ -49,9 +50,50 @@
         .circle2 {
             width: 400px;
             height: 400px;
-            background: rgba(135, 206, 250, 0.2); /* Light sky blue */
+            background: rgba(135, 206, 250, 1); /* Light sky blue */
             bottom: 10%;
             right: 15%;
+        }
+
+        .navbar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: absolute;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #ffffff; /* Light orange */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ffa749; /* Orange on hover */
+        }
+
+        .logout-link:hover {
+            color: #ff4c4c; /* Red on hover for logout */
         }
 
         /* Glassmorphism effect for form */
@@ -130,6 +172,11 @@
             background-color: #ff9f29;
             color: #ffffff;
         }
+
+        option {
+            color: #ffffff; /* Black text color for options */
+            background-color: #1d1d1d; /* White background color for options */
+        }
     </style>
 </head>
 
@@ -138,13 +185,23 @@
     <div class="circle1"></div>
     <div class="circle2"></div>
 
+      <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">Waste Manager</a>
+        <div class="navbar-nav">
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="{% url 'waste_request_status' %}" class="nav-link">Request Status</a>
+            <a href="{% url 'logout' %}" class="nav-link logout-link">Logout</a>
+        </div>
+    </nav><br><br>
+
     <!-- Glassmorphic form -->
     <form method="post" action="{% url 'submit_waste_request' %}">
         {% csrf_token %}
 
         <label for="waste_type">Waste Type:</label>
         {{ form.waste_type }}
-        <span class="error-message" id="waste-type-error">Please select a waste type.</span>
+        <span class="error-message" id="waste-type-error" >Please select a waste type.</span>
 
         <label for="quantity">Quantity (kg):</label>
         {{ form.quantity }}
@@ -154,7 +211,7 @@
         {{ form.scheduled_time }}
         <span class="error-message" id="scheduled-time-error">Please select a valid date and time.</span>
 
-        <label for="location">Location:</label>
+        <label for="location">Building Number and Area:</label>
         {{ form.location }}
         <span class="error-message" id="location-error">Please enter a location.</span>
 
@@ -210,4 +267,3 @@
     </script>
 </body>
 </html>
-

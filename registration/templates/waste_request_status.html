@@ -54,6 +54,47 @@
             right: 15%;
         }
 
+        .navbar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: absolute;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #ffffff; /* Light orange */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ffa749; /* Orange on hover */
+        }
+
+        .logout-link:hover {
+            color: #ff4c4c; /* Red on hover for logout */
+        }
+
         /* Container for table */
         .table-container {
             background: rgba(255, 255, 255, 0.1);
@@ -152,6 +193,15 @@
     <!-- Background circles -->
     <div class="circle1"></div>
     <div class="circle2"></div>
+
+          <!-- Navbar --><nav class="navbar">
+            <a href="#" class="navbar-brand">Waste Manager</a>
+            <div class="navbar-nav">
+                <a href="{% url 'home' %}" class="nav-link">Home</a>
+                <a href="{% url 'submit_waste_request' %}" class="nav-link">Create Request</a>
+                <a href="{% url 'logout' %}" class="nav-link logout-link">Logout</a>
+            </div>
+        </nav>
 
     <!-- Table Container with Glassmorphism Effect -->
     <div class="table-container">

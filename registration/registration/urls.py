@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from app1 import views
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('submit-request/', views.submit_waste_request, name='submit_waste_request'),
     path('request-status/', views.waste_request_status, name='waste_request_status'),
     path('cancel-request/<int:request_id>/', views.cancel_request, name='cancel_request'),
+    
 
 
     

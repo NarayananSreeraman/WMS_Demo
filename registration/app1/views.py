@@ -79,3 +79,5 @@ def cancel_request(request, request_id):
     waste_request = get_object_or_404(WasteRequest, id=request_id, user=request.user)
     waste_request.delete()
     return redirect('waste_request_status')
+
+
