@@ -214,6 +214,7 @@
                 <th>Scheduled Time</th>
                 <th>Location</th>
                 <th>Status</th>
+                <th>Route</th>
                 <th>Action</th> <!-- New column for Cancel Button -->
             </tr>
             {% for request in requests %}
@@ -222,7 +223,12 @@
                 <td>{{ request.quantity }}</td>
                 <td>{{ request.scheduled_time }}</td>
                 <td>{{ request.location }}</td>
-                <td>{{ request.status }}</td>
+                <td>
+                    <span class="{% if request.status == 'Accepted' %}status-accepted{% elif request.status == 'Denied' %}status-denied{% endif %}">
+                        {{ request.status }}
+                    </span>
+                </td>
+                <td>{{ request.route }}</td>
                 <td>
                     <a href="{% url 'cancel_request' request.id %}" class="cancel-button">Cancel</a>
                 </td>
