@@ -157,5 +157,11 @@ def update_route(request, request_id):
         waste_request.route = selected_route
         waste_request.save()
         return redirect("admin_dashboard")
+    
+from django.shortcuts import render
+
+def route(request):
+    return render(request, 'route.html')
+
 
 

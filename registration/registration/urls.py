@@ -31,8 +31,8 @@ urlpatterns = [
     path('accept-request/<int:request_id>/', views.accept_request, name="accept_request"),
     path('reject-request/<int:request_id>/', views.reject_request, name="reject_request"),
     path("assign_route/<int:request_id>/", views.assign_route, name="assign_route"),
-    path('update-route/<int:request_id>/', views.update_route, name='update_route')
-
+    path('update-route/<int:request_id>/', views.update_route, name='update_route'),
+    path('route/', views.route, name="route"),
 
 
 

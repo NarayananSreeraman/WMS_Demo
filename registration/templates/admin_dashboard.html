@@ -199,6 +199,7 @@
         <h1><b>Waste Manager</b><i> Admin</i></h1>
         <div class="nav-links">
             <a href="{% url 'login' %}" class="nav-link">Back to Login Page</a>
+            <a href="{% url 'route' %}" class="nav-link">Routes</a>
         </div>
     </div>
     
@@ -234,8 +235,6 @@
                             <option value="Route4" {% if request.route == 'Route4' %}selected{% endif %}>Route 4</option>
                             <option value="Route5" {% if request.route == 'Route5' %}selected{% endif %}>Route 5</option>
                             <option value="Route6" {% if request.route == 'Route6' %}selected{% endif %}>Route 6</option>
-                            <option value="Route7" {% if request.route == 'Route7' %}selected{% endif %}>Route 7</option>
-                            <option value="Route8" {% if request.route == 'Route8' %}selected{% endif %}>Route 8</option>
                         </select>
                         <button type="submit" class="routeButton">Set Route</button>
                     </form>

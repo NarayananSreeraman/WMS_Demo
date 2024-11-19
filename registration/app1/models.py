@@ -16,8 +16,6 @@ class WasteRequest(models.Model):
         ('Route4', 'Route4'),
         ('Route5', 'Route5'),
         ('Route6', 'Route6'),
-        ('Route7', 'Route7'),
-        ('Route8', 'Route8'),
     ]
 
     waste_type = models.CharField(max_length=100)
